@@ -1,37 +1,25 @@
 <template>
   <ul>
-    <li v-for="(fruit, index) in fruits">{{ `${index} - ${fruit}` }}</li>
-  </ul>
-
-  <ul>
-    <li v-for="({ prenom, notes }, index) of utilisateurs">
-      {{ `${index} : ${prenom}` }}
-      <span v-for="note in notes">{{ note }} / </span>
-    </li>
-  </ul>
-  <ul>
-    <li v-for="(valeur, cle, index) of voiture">
-      {{ `${index} : ${valeur} - ${cle}` }}
-    </li>
-  </ul>
-  <ul>
-    <li v-for="n in 4">Bonjour !</li>
+    <template v-for="({ prenom, id }, index) of utilisateurs" :key="id">
+      <li v-if="prenom != 'Paul'">
+        {{ prenom }}
+      </li>
+    </template>
   </ul>
 </template>
 
 <script setup lang="ts">
 import { reactive } from 'vue';
 
-const fruits = reactive(['fraise', 'pomme', 'kiwi']);
 const utilisateurs = reactive([
-  { prenom: 'Jean', notes: [14, 15, 18] },
-  { prenom: 'Paul', notes: [12, 10, 8] },
-  { prenom: 'Pierre', notes: [3, 15, 18] },
+  { prenom: 'Jean', id: 1 },
+  { prenom: 'Paul', id: 2 },
+  { prenom: 'Pierre', id: 3 },
 ]);
-const voiture = {
-  roues: 4,
-  prix: 4000,
-};
+
+setTimeout(() => {
+  utilisateurs.push({ prenom: 'Julie', age: 40 });
+}, 3000);
 </script>
 
 <style scoped lang="scss"></style>
